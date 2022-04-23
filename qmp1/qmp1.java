@@ -8,12 +8,25 @@ Class Prenda {
 	/* Tener un constructor con colorSecundario y otro sin él no aporta nada porque directamente podemos pasarle el valor en null cuando se instancia y listo.
 	Tener un constructor sin colorSecundario y un setter tampoco es una buena opción ya que la Prenda pierde inmutabilidad.
 	*/
-	Prenda (TipoPrenda tipo, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
-	this.tipo = tipo
-	this.material = material
-	this.colorPrimario = colorPrimario
-	this.colorSecundario = colorSecundario
-	this.trama = trama
+	void Prenda (TipoPrenda tipo, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+		validarParametros(tipo, material, colorPrimario)
+		this.tipo = tipo
+		this.material = material
+		this.colorPrimario = colorPrimario
+		this.colorSecundario = colorSecundario
+		this.trama = trama
+	}
+	
+	void validarParametros(TipoPrenda tipo, Material material, Color colorPrimario) {
+		if(tipo == NULL) {
+			throw new PrendaInvalidaException("Falta el tipo") // extiende de RuntimeException
+		}
+		if(material == NULL) {
+			throw new PrendaInvalidaException("Falta el material")
+		}
+		if(colorPrimario == NULL) {
+			throw new PrendaInvalidaException("Falta el colorPrimario")
+		}
 	}
 }
 
@@ -49,9 +62,12 @@ Enum TipoPrenda {
 	Categoria categoria
 	String nombre
 	
-	TipoPrenda(String nombre) { this.nombre = nombre}
+	TipoPrenda(String nombre, Categoria categoria) { 
+		this.nombre = nombre
+		this.categoria = categoria
+		}
 	
-	ZAPATO("Zapato"), CAMISA("Camisa"), PANTALON("Pantalon");
+	ZAPATO("Zapato", Categoria.CALZADO), CAMISA("Camisa", Categoria.SUPERIOR), PANTALON("Pantalon", Categoria.INFERIOR);
 	
 	// Prenda prenda = new Prenda(TipoMaterial.ZAPATO)
 }
