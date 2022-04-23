@@ -4,7 +4,19 @@ Class Prenda {
 	Color colorPrimario
 	Color colorSecundario
 	Trama trama
+	
+	/* Tener un constructor con colorSecundario y otro sin él no aporta nada porque directamente podemos pasarle el valor en null cuando se instancia y listo.
+	Tener un constructor sin colorSecundario y un setter tampoco es una buena opción ya que la Prenda pierde inmutabilidad.
+	*/
+	Prenda (TipoPrenda tipo, Material material, Color colorPrimario, Color colorSecundario, Trama trama){
+	this.tipo = tipo
+	this.material = material
+	this.colorPrimario = colorPrimario
+	this.colorSecundario = colorSecundario
+	this.trama = trama
+	}
 }
+
 
 Class Color {
 	Integer red
@@ -12,6 +24,7 @@ Class Color {
 	integer blue
 }
 
+// No pedían Atuendo
 Class Atuendo {
 	Prenda parteSuperior
 	Prenda parteInferior
