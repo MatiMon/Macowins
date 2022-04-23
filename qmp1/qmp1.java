@@ -28,6 +28,10 @@ Class Prenda {
 			throw new PrendaInvalidaException("Falta el colorPrimario")
 		}
 	}
+	
+	Categoria getCategoria() {
+		return tipo.getCategoria()
+	}
 }
 
 
@@ -66,12 +70,21 @@ Enum TipoPrenda {
 		this.nombre = nombre
 		this.categoria = categoria
 		}
+		
+	Categoria getCategoria() {
+		return this.categoria
+	}
 	
+	//de esta forma le quitamos la posibilidad al usuario de ingresar una Categoria que no corresponda, en lugar de validar que se haga el camino feliz directamente lo forzamos
 	ZAPATO("Zapato", Categoria.CALZADO), CAMISA("Camisa", Categoria.SUPERIOR), PANTALON("Pantalon", Categoria.INFERIOR);
 	
 	// Prenda prenda = new Prenda(TipoMaterial.ZAPATO)
 }
 
+/*
+Descartamos una clase abstracta Prenda con subclases por cada Categoria de Prenda porque no hay mucho comportamiento en común que justifique la herencia.
+Optamos por Enum ya que es simple y la cantidad de Categorías es finita según aclara el enunciado.
+*/
 Enum Categoria {
 	SUPERIOR, CALZADO, INFERIOR, ACCESORIOS
 }
